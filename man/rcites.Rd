@@ -3,13 +3,38 @@
 \docType{package}
 \name{rcites}
 \alias{rcites}
-\alias{sppplus_baseurl}
 \alias{rcites-package}
-\title{rcites:}
-\usage{
-sppplus_baseurl()
-}
+\title{rcites}
 \description{
-A programmatic interface to the Species+ <https://speciesplus.net/> database
-via the Species+/CITES Checklist API <https://api.speciesplus.net/>.
+A programmatic interface to the Species+ \url{https://speciesplus.net/} database
+via the Species+/CITES Checklist API \url{https://api.speciesplus.net/}.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://ropensci.github.io/rcites/}
+  \item \url{https://github.com/ropensci/rcites}
+  \item Report bugs at \url{https://github.com/ropensci/rcites/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Kevin Cazelles \email{kevin.cazelles@gmail.com} (0000-0001-6619-9874)
+
+Authors:
+\itemize{
+  \item Jonas Geschke \email{jonas.e.geschke@gmail.com} (0000-0002-5654-9313)
+  \item Ignasi Bartomeus (0000-0001-7893-4389)
+}
+
+Other contributors:
+\itemize{
+  \item Jonathan Goldenberg [contributor]
+  \item Marie-Bé Leduc [contributor]
+  \item Yasmine Verzelen [contributor]
+  \item Noam Ross [reviewer]
+  \item Margaret Siple [reviewer]
+}
+
+}
+\keyword{internal}
