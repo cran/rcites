@@ -6,6 +6,7 @@
 #' @docType package
 #' @name rcites
 #' @keywords internal
+#' @importFrom cli cat_rule cat_line
 "_PACKAGE"
 
 
@@ -13,13 +14,11 @@
 
 ################## General helpers
 
-
 rcites_baseurl <- function() "https://api.speciesplus.net/api/v1/"
 
 rcites_url <- function(...) {
     paste0(rcites_baseurl(), ...)
 }
-
 
 rcites_get <- function(q_url, token, ...) {
     names(token) <- "X-Authentication-Token"
@@ -65,7 +64,15 @@ rcites_checkid <- function(taxon_id) {
 }
 
 rcites_current_id <- function(x) {
-    cat(">>> Now processing taxon_id '", x, "'............", sep = "")
+  # cat("\r", cli::symbol$tick, " Info for '", x, "' successfully retreived \n")
+  # cat(">> Now processing taxon_id '", x, "'............", sep = "")
+  cat(cli::symbol$arrow_right, " Now processing taxon_id '", x,
+    "'", paste(rep(".", 26 - nchar(x)), collapse = ""), sep = "")
+}
+
+rcites_cat_done <- function() {
+  # cat(" done. \n")
+  cat(cli::symbol$tick, "\n")
 }
 
 rcites_add_taxon_id <- function(x, taxon_id) {
@@ -136,19 +143,24 @@ rcites_autopagination <- function(q_url, per_page, pages, tot_page, token,
         q_url,
         pattern = "page=[[:digit:]]+\\&per_page=[[:digit:]]+$",
         replacement = "")
-    #
+    ##
+    cat_rule(paste0(tot_page, " pages available, retrieving info from ", length(pages)," more"), col = "blue")
     for (i in seq_along(pages)) {
         if (verbose)
-            cat("Retrieving info from page ", pages[i], "/", tot_page,
-                "     \r")
+            rcites_cat_pages(pages[i])
         q_url_new <- paste0(q_url_0, "page=", pages[i], "&per_page=",
           min(per_page, 500))
         out[[i]] <- rcites_res(q_url_new, token, ...)
+        if (verbose)
+            rcites_cat_done()
     }
-    if (verbose)
-        cat("\nDone!\n")
     #
     out
+}
+
+rcites_cat_pages <- function(pag) {
+  cat(cli::symbol$arrow_right, "Retrieving info from page", pag,
+    paste(rep(".", 25 - nchar(pag)), collapse = ""))
 }
 
 rcites_numberpages <- function(x) {
@@ -256,9 +268,9 @@ rcites_print_shorten <- function(x, stop = 20) {
       paste0(substring(y, 1, stop), " [truncated]"), y)))
 }
 
-rcites_print_title <- function(x, after = "", before = "") {
-    cat(before, x, "\n", paste(rep("-", nchar(x) + nchar(before)),
-      collapse = ""), after, sep = "")
+rcites_print_title <- function(x, after, before) {
+    cat_line()
+    cat_rule(x, col = "blue")
 }
 
 rcites_print_df <- function(x, nrows = 10) {
@@ -282,7 +294,7 @@ rcites_print_df_rm <- function(x, col_rm = "", nrows = 10) {
 }
 
 rcites_print_taxon_id <- function(x, max_print = 20) {
-    rcites_print_title("Taxon identifiers:", "\n")
+    rcites_print_title("Taxon identifiers:")
     tmp <- unique(x)
     if (length(tmp) > max_print) {
         cat(paste(tmp[seq_len(max_print - 1)], collapse = ", "), "[tuncated]\n")
@@ -352,29 +364,40 @@ rcites_taxonconcept_names <- function(x, name, identifier) {
     out
 }
 
-rcites_unlist_party <- function(x) {
-    id <- which(names(x) == "party")
-    if (length(x[id]) == 1) {
-        tmp <- rep(list(NA_character_), 3)
-        names(tmp) <- c("party.iso_code2", "party.name", "party.type")
-    } else tmp <- x[id]
-    cbind(x[-id], as.data.frame(tmp))
+rcites_party <- function(x) {
+    if (is.na(x[1L])) {
+      out <- rep(NA_character_, 3)
+    } else out <- unlist(x)
+    out
 }
 
 rcites_taxonconcept_cites_listings <- function(x, identifier) {
-    tmp <- lapply(lapply(x, rcites_null_to_na),
-      function(y) data.frame(do.call(rbind, y$cites_listings)))
-    tmp2 <- lapply(tmp, rcites_unlist_party)
-    wch <- which(unlist(lapply(tmp, length)) > 0)
-    #
-    if (length(wch)) {
-        out <- cbind(id = rep(identifier[wch], unlist(lapply(tmp2[wch],
-            nrow))), data.frame(apply(do.call(rbind, tmp2[wch]), 2, unlist),
-            stringsAsFactors = FALSE))
-    } else {
-        out <- data.frame()
-    }
-    #
+    # extract cites_listings
+    ls_cl <- lapply(lapply(x, rcites_null_to_na), function(x) x$cites_listings)
+    wch <- unlist(lapply(ls_cl, function(x) length(x) > 0))
+    ##
+    if (sum(wch)) {
+      tmp <- lapply(
+        Filter(Negate(is.null), ls_cl),
+        function(y) do.call(rbind, y)
+      )
+      tmp2 <- do.call(rbind, lapply(tmp, as.data.frame))
+      ## collapse hash_annotation
+      tmp2$hash_annotation <- lapply(tmp2$hash_annotation, paste, collapse = "")
+      ## Deal with party
+      party_all <- as.data.frame(
+        do.call(rbind, lapply(tmp2$party, rcites_party)))
+      row.names(party_all) <- NULL
+      colnames(party_all) <- paste0('party_', colnames(party_all))
+      ##
+      tmp3 <- cbind(tmp2[! names(tmp2) %in% c("party")] , party_all)
+      out <- data.frame(
+          id = rep(identifier[wch], unlist(lapply(tmp, nrow))),
+          apply(tmp3, 2, unlist),
+          stringsAsFactors = FALSE
+        )
+    } else out <- data.frame()
+    ## output
     out <- rcites_assign_class(out)
     out
 }
