@@ -2,10 +2,18 @@
 % Please edit documentation in R/spp_cites_legislation.R
 \name{spp_cites_legislation}
 \alias{spp_cites_legislation}
-\title{Get current CITES appendix listings and reservations.}
+\title{Get current CITES appendix listings and reservations}
 \usage{
-spp_cites_legislation(taxon_id, scope = "current", language = "en",
-  raw = FALSE, token = NULL, verbose = TRUE, ...)
+spp_cites_legislation(
+  taxon_id,
+  scope = "current",
+  language = "en",
+  raw = FALSE,
+  token = NULL,
+  verbose = TRUE,
+  pause = 1,
+  ...
+)
 }
 \arguments{
 \item{taxon_id}{a vector of character strings containing species' taxon
@@ -28,6 +36,10 @@ set directly in \code{Renviron}. Alternatively, \code{\link[=set_token]{set_toke
 be used to set \code{SPECIESPLUS_TOKEN} for the current session.}
 
 \item{verbose}{a logical. Should extra information be reported on progress?}
+
+\item{pause}{a duration (in second) to suspend execution for (see
+\code{\link[=Sys.sleep]{Sys.sleep()}}). This was added cause the web API returns a 404 error too many
+requests in a short time interval.}
 
 \item{...}{Further named parameters, see \code{\link[httr:GET]{httr::GET()}}.}
 }

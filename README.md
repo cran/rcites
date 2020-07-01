@@ -1,19 +1,16 @@
-<img src="man/figures/rcites_logo.png" width="130" height="150" align="right"/>
-
-### Current Status
+# rcites <img src="man/figures/rcites_logo.png" width="130" height="150" align="right"/>
 
 [![Build status](https://travis-ci.org/ropensci/rcites.svg?branch=master)](https://travis-ci.org/ropensci/rcites)
 [![Build status](https://ci.appveyor.com/api/projects/status/kgimo4v7rvtpkp5e?svg=true)](https://ci.appveyor.com/project/KevCaz/rcites-mo3vb)
 [![codecov](https://codecov.io/gh/ropensci/rcites/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/rcites)
+[![status](https://tinyverse.netlify.com/badge/rcites)](https://CRAN.R-project.org/package=rcites)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![ROpenSci status](https://badges.ropensci.org/244_status.svg)](https://github.com/ropensci/onboarding/issues/244)
-[![CRAN status](https://www.r-pkg.org/badges/version/rcites)](https://www.r-pkg.org/badges/version/rcites)
+[![CRAN status](https://www.r-pkg.org/badges/version/rcites)](https://CRAN.R-project.org/package=rcites)
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/rcites)](https://cran.r-project.org/package=rcites)
 [![Zenodo DOI](https://zenodo.org/badge/113842199.svg)](https://zenodo.org/badge/latestdoi/113842199)
 [![JOSS DOI](http://joss.theoj.org/papers/10.21105/joss.01091/status.svg)](https://doi.org/10.21105/joss.01091)
 
-
-# rcites
 
 An R package to access information from the [Speciesplus](https://speciesplus.net/) database via the [Speciesplus/CITES Checklist API](https://api.speciesplus.net/documentation/v1.html). The package is available for download from [CRAN](https://cran.r-project.org/package=rcites) (stable version) and [Github](https://github.com/ropensci/rcites) (development version).
 
@@ -26,14 +23,12 @@ The package can be installed from CRAN:
 
 ```R
 install.packages("rcites")
-library("rcites")
 ```
 
-The development version can be installed via the `devtools` package:
+The development version can be installed via the [`remotes`](https://CRAN.R-project.org/package=remotes) :package:
 
 ```R
-devtools::install_github("ropensci/rcites")
-library("rcites")
+remotes::install_github("ropensci/rcites")
 ```
 
 
@@ -41,12 +36,12 @@ library("rcites")
 
 To set up a connection to the CITES Speciesplus database, a personal authentication
 token is required. Please see the vignette for details how to get a token and
-how to set the token for package use: [Get started with rcites](https://ropensci.github.io/rcites/articles/get_started.html)
+how to set the token for package use: [Get started with rcites](https://docs.ropensci.org/rcites/articles/a_get_started.html)
 
 Additional information about specific use examples are provided for the
-[African bush elephant (*Loxodonta africana*)](https://ropensci.github.io/rcites/articles/elephant.html).
+[African bush elephant (*Loxodonta africana*)](https://docs.ropensci.org/rcites/articles/b_elephant.html).
 The package usage for querying multiple species is described in another
-vignette entitled ['Bulk analysis with rcites'](https://ropensci.github.io/rcites/articles/bulk_analysis.html).
+vignette entitled ['Bulk analysis with rcites'](https://docs.ropensci.org/rcites/articles/c_bulk_analysis.html).
 
 
 ### Key features
@@ -71,7 +66,7 @@ The package functions have three different prefixes:
 
 ### Citation information
 
-When citing, please refer to both the [package citation](https://ropensci.github.io/rcites/authors.html) and the [release paper](https://doi.org/10.21105/joss.01091).
+When citing, please refer to both the [package citation](https://docs.ropensci.org/rcites/authors.html) and the [release paper](https://doi.org/10.21105/joss.01091).
 
 
 ## Contributors
@@ -85,7 +80,10 @@ When citing, please refer to both the [package citation](https://ropensci.github
 - Editor: [Scott Chamberlain](https://github.com/sckott)
 
 - Reporting issue(s):
-  - [FVFaleiro](https://github.com/FVFaleiro)
+  - @FVFaleiro
+  - @eveskew
+  - @fleurhierink
+  - @wajra
 
 
 
@@ -104,12 +102,11 @@ While creating this package, we greatly benefited from:
 
 ## Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
+Please note that this project is released with a [Contributor Code of Conduct](https://docs.ropensci.org/rcites/CONDUCT.html).
 By participating in this project you agree to abide by its terms.
 
 Also, please read the Terms and Conditions of Use of Speciesplus Data:
 https://speciesplus.net/terms-of-use.
-
 
 
 [![ropensci_footer](https://ropensci.org/public_images/ropensci_footer.png)](https://ropensci.org)

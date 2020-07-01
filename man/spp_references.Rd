@@ -4,8 +4,14 @@
 \alias{spp_references}
 \title{Get references for a given taxon concept}
 \usage{
-spp_references(taxon_id, raw = FALSE, token = NULL, verbose = TRUE,
-  ...)
+spp_references(
+  taxon_id,
+  raw = FALSE,
+  token = NULL,
+  verbose = TRUE,
+  pause = 1,
+  ...
+)
 }
 \arguments{
 \item{taxon_id}{a vector of character strings containing species' taxon
@@ -21,14 +27,18 @@ set directly in \code{Renviron}. Alternatively, \code{\link[=set_token]{set_toke
 
 \item{verbose}{a logical. Should extra information be reported on progress?}
 
+\item{pause}{a duration (in second) to suspend execution for (see
+\code{\link[=Sys.sleep]{Sys.sleep()}}). This was added cause the web API returns a 404 error too many
+requests in a short time interval.}
+
 \item{...}{Further named parameters, see \code{\link[httr:GET]{httr::GET()}}.}
 }
 \value{
 If \code{raw} is set to \code{TRUE} then an object of class \code{spp_raw} (or
-\code{spp_raw_multi} if \code{length(taxon_id)>1}) is returned which is essentially
+\code{spp_raw_multi} if \code{length(taxon_id) > 1}) is returned which is essentially
 a list of lists (see option \code{as = 'parsed'} in \code{\link[httr:content]{httr::content()}}).
 Otherwise, an object of class \code{spp_refs} (or \code{spp_refs_multi} if
-\code{length(taxon_id)>1}) is returned which is a list of one
+\code{length(taxon_id) > 1}) is returned which is a list of one
 data frame:
 \itemize{
 \item \code{references} that includes the identifier of the reference and the

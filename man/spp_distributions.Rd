@@ -2,10 +2,17 @@
 % Please edit documentation in R/spp_distributions.R
 \name{spp_distributions}
 \alias{spp_distributions}
-\title{Get distributions data available for a given taxon concept.}
+\title{Get distributions data available for a given taxon concept}
 \usage{
-spp_distributions(taxon_id, language = "en", raw = FALSE,
-  token = NULL, verbose = TRUE, ...)
+spp_distributions(
+  taxon_id,
+  language = "en",
+  raw = FALSE,
+  token = NULL,
+  verbose = TRUE,
+  pause = 1,
+  ...
+)
 }
 \arguments{
 \item{taxon_id}{a vector of character strings containing species'
@@ -24,6 +31,10 @@ set directly in \code{Renviron}. Alternatively, \code{set_token()} can
 be used to set \code{SPECIESPLUS_TOKEN} for the current session.}
 
 \item{verbose}{a logical. Should extra information be reported on progress?}
+
+\item{pause}{a duration (in second) to suspend execution for (see
+\code{\link[=Sys.sleep]{Sys.sleep()}}). This was added cause the web API returns a 404 error too many
+requests in a short time interval.}
 
 \item{...}{Further named parameters, see \code{\link[httr:GET]{httr::GET()}}.}
 }

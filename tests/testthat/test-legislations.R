@@ -13,7 +13,7 @@ res4 <- spp_cites_legislation(taxon_id = tx_id, language = 'fr',
   verbose = FALSE)
 ut_pause()
 #
-res5 <- spp_eu_legislation(taxon_id = tx_id, verbose = FALSE)
+res5 <- spp_eu_legislation(taxon_id = tx_id)
 res5b <- spp_eu_legislation(taxon_id = tx_id2, verbose = FALSE)
 res6 <- spp_eu_legislation(taxon_id = tx_id, raw = TRUE, verbose = FALSE)
 ut_pause()
@@ -58,23 +58,18 @@ test_that("Expected number of entries", {
 })
 
 
-
-lang_en_ci <- c("Guinea", "Guinée") %in% res1$cites_suspensions$geo_entity.name
-lang_fr_ci <- c("Guinea", "Guinée") %in% res4$cites_suspensions$geo_entity.name
-#
-lang_en_eu <- c("Ethiopia", "Ethiopie") %in% res5$eu_decisions$geo_entity.name
-lang_fr_eu <- c("Ethiopia", "Ethiopie") %in% res8$eu_decisions$geo_entity.name
-
 test_that("Language", {
-  expect_true(all(lang_en_ci == c(TRUE, FALSE)))
-  expect_true(all(lang_fr_ci == c(FALSE, TRUE)))
-  expect_true(all(lang_en_eu == c(TRUE, FALSE)))
-  expect_true(all(lang_fr_eu == c(FALSE, TRUE)))
+  expect_true("Guinea" %in% res1$cites_suspensions$geo_entity.name)
+  expect_true("Guinée" %in% res4$cites_suspensions$geo_entity.name)
+  expect_true("Namibia" %in% res5$eu_decisions$geo_entity.name)
+  expect_true("Namibie" %in% res8$eu_decisions$geo_entity.name)
 })
 
 
 ut_pause(1)
 res9 <- spp_cites_legislation(taxon_id = c(tx_id, tx_id2), verbose = FALSE)
+res9b <- spp_cites_legislation(taxon_id = c(tx_id, tx_id2, "8094"),
+    verbose = FALSE)
 ut_pause()
 res10 <- spp_eu_legislation(taxon_id = c(tx_id, tx_id2), verbose = FALSE)
 ut_pause()
@@ -91,13 +86,15 @@ test_that("leg_multi outputs", {
   expect_equal(class(res9$cites_listings), cl_df)
   expect_equal(class(res10$eu_listings), cl_df)
   #
+  expect_identical(res9b$cites_listings, res9$cites_listings)
+  #
   expect_equal(nrow(res9$cites_listings),
     nrow(res1$cites_listings) + nrow(res1b$cites_listings))
   expect_equal(nrow(res10$eu_listings),
     nrow(res5$eu_listings) + nrow(res5b$eu_listings))
   #
-  expect_identical(unique(res9$cites_listings$taxon_id),  c(tx_id, tx_id2))
-  expect_identical(unique(res10$eu_listings$taxon_id),  c(tx_id, tx_id2))
+  expect_identical(unique(res9$cites_listings$taxon_id), c(tx_id, tx_id2))
+  expect_identical(unique(res10$eu_listings$taxon_id), c(tx_id, tx_id2))
   #
   expect_identical(class(res11), cl_raw_multi)
   expect_identical(class(res12), cl_raw_multi)

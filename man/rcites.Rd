@@ -12,19 +12,19 @@ via the Species+/CITES Checklist API \url{https://api.speciesplus.net/}.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://ropensci.github.io/rcites/}
+  \item \url{https://docs.ropensci.org/rcites/}
   \item \url{https://github.com/ropensci/rcites}
   \item Report bugs at \url{https://github.com/ropensci/rcites/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Kevin Cazelles \email{kevin.cazelles@gmail.com} (0000-0001-6619-9874)
+\strong{Maintainer}: Kevin Cazelles \email{kevin.cazelles@gmail.com} (\href{https://orcid.org/0000-0001-6619-9874}{ORCID})
 
 Authors:
 \itemize{
-  \item Jonas Geschke \email{jonas.e.geschke@gmail.com} (0000-0002-5654-9313)
-  \item Ignasi Bartomeus (0000-0001-7893-4389)
+  \item Jonas Geschke \email{jonas.e.geschke@gmail.com} (\href{https://orcid.org/0000-0002-5654-9313}{ORCID})
+  \item Ignasi Bartomeus (\href{https://orcid.org/0000-0001-7893-4389}{ORCID})
 }
 
 Other contributors:

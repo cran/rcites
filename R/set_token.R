@@ -2,18 +2,18 @@
 #'
 #' Set and forget the authentification token for the current session.
 #'
-#' @param token a character string (with quotes) containing your token. If `NULL`
-#' then the token can be passed without quotes (not as character string) after
-#' a prompt.
+#' @param token a character string (with quotes) containing your token. If
+#' `NULL`, then the token can be passed without quotes (not as character
+#' string) after a prompt.
 #'
 #' @references
-#' \url{https://api.speciesplus.net/documentation}
+#' <https://api.speciesplus.net/documentation>
 #'
 #' @export
 #'
 #' @examples
-#' \donttest{
-#'  # NB the token below is not working
+#' \dontrun{
+#'  # NB: the token below is not working
 #'  set_token('8QW6Qgh57sBG2k0gtt')
 #'  # interactively
 #'  set_token()

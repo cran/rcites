@@ -6,7 +6,7 @@
 #' @docType package
 #' @name rcites
 #' @keywords internal
-#' @importFrom cli cat_rule cat_line
+#' @importFrom cli cat_rule cat_line col_green col_red
 "_PACKAGE"
 
 
@@ -64,15 +64,16 @@ rcites_checkid <- function(taxon_id) {
 }
 
 rcites_current_id <- function(x) {
-  # cat("\r", cli::symbol$tick, " Info for '", x, "' successfully retreived \n")
-  # cat(">> Now processing taxon_id '", x, "'............", sep = "")
   cat(cli::symbol$arrow_right, " Now processing taxon_id '", x,
     "'", paste(rep(".", 26 - nchar(x)), collapse = ""), sep = "")
 }
 
 rcites_cat_done <- function() {
-  # cat(" done. \n")
-  cat(cli::symbol$tick, "\n")
+  cat_line(col_green(cli::symbol$tick))
+}
+
+rcites_cat_error <- function() {
+  cat_line(col_red(cli::symbol$cross))
 }
 
 rcites_add_taxon_id <- function(x, taxon_id) {
@@ -211,15 +212,19 @@ rcites_assign_class <- function(x) {
 
 
 rcites_simplify_listings <- function(x) {
-    # fields below may or may not be included, so there are removed
-    vc_rm <- c("party", "hash_annotation", "annotation")
-    tmp <- lapply(lapply(x, FUN = function(x) x[!names(x) %in% vc_rm]),
-        FUN = function(y) data.frame(do.call(cbind, y),
-        stringsAsFactors = FALSE))
-    if (length(tmp) > 1) {
-        out <- do.call(rbind, tmp)
+    if (!length(x)) {
+      out <- data.frame()
     } else {
-        out <- tmp[[1L]]
+      # fields below may or may not be included, so there are removed
+      vc_rm <- c("party", "hash_annotation", "annotation")
+      tmp <- lapply(lapply(x, FUN = function(x) x[!names(x) %in% vc_rm]),
+          FUN = function(y) data.frame(do.call(cbind, y),
+          stringsAsFactors = FALSE))
+      if (length(tmp) > 1) {
+          out <- do.call(rbind, tmp)
+      } else {
+          out <- tmp[[1L]]
+      }
     }
     #
     out <- rcites_to_logical(out)
@@ -239,20 +244,25 @@ rcites_simplify_decisions <- function(x) {
 }
 
 rcites_simplify_distributions <- function(x) {
-    tmp <- do.call(rbind, lapply(lapply(x, rcites_null_to_na), rbind))
+    tmp <- as.data.frame(
+        do.call(rbind, lapply(lapply(x, rcites_null_to_na), rbind)),
+        stringsAsFactors = FALSE
+    )
+    tmp1 <- tmp[!names(tmp) %in% c("tags", "references")]
     out <- list()
-    out$distributions <- data.frame(apply(tmp[, !colnames(tmp) %in% c("tags",
-        "references")], 2, unlist), stringsAsFactors = FALSE)
+    out$distributions <- as.data.frame(lapply(tmp1, unlist),
+        stringsAsFactors = FALSE)
     # collapse tags
-    out$distributions$tags <- unlist(lapply(tmp[, colnames(tmp) == "tags"],
-        function(x) ifelse(length(x), paste(unlist(x), collapse = ", "),
-            "")))
+    out$distributions$tags <- unlist(lapply(tmp$tags,
+        function(x) ifelse(length(x), paste(unlist(x), collapse = ", "), "")
+    ))
     out$distributions <- rcites_assign_class(out$distributions)
     # references
-    tmp2 <- lapply(tmp[, colnames(tmp) == "references"], cbind)
-    out$references <- data.frame(id = rep(out$distributions$id,
-      unlist(lapply(tmp2, length))),
-      reference = unlist(tmp2), stringsAsFactors = FALSE)
+    tmp2 <- tmp$references
+    out$references <- data.frame(
+        id = rep(out$distributions$id,
+        unlist(lapply(tmp2, length))),
+        reference = unlist(tmp2), stringsAsFactors = FALSE)
     out$references <- rcites_assign_class(out$references)
     #
     out
