@@ -24,7 +24,7 @@
 #' @param ... Further named parameters, see [httr::GET()].
 #'
 #' @return If `raw` is set to `TRUE` then an object of class `spp_raw` (or
-#' `spp_raw_multi` if `length(taxon_id)>1`) is returned which is essentially
+#' `spp_raw_multi` if `length(taxon_id) > 1`) is returned which is essentially
 #' a list of lists (see option `as = 'parsed'` in [httr::content()]).
 #' Otherwise, an object of class `spp_cites_leg` (or `spp_cites_leg_multi` if
 #' `length(taxon_id)>1`) is returned which is a list of three data frames:
@@ -72,7 +72,7 @@ spp_cites_legislation <- function(taxon_id, scope = "current", language = "en",
             q_url <- rcites_url("taxon_concepts/", taxon_id,
               "/cites_legislation.json", query_string)
             ## get results
-            tmp <- rcites_res(q_url, token, ...)
+            tmp <- rcites_res(q_url, token, raw, verbose, ...)
             ## outputs
             if (raw) {
                 out <- tmp
@@ -88,8 +88,6 @@ spp_cites_legislation <- function(taxon_id, scope = "current", language = "en",
                 class(out) <- c("spp_cites_leg")
             }
         }
-        if (verbose)
-            rcites_cat_done()
     }
     Sys.sleep(pause)
     out

@@ -6,37 +6,69 @@
 #' @docType package
 #' @name rcites
 #' @keywords internal
-#' @importFrom cli cat_rule cat_line col_green col_red
+#' @importFrom cli cat_rule cat_line col_green col_red col_blue col_yellow
 "_PACKAGE"
 
 
 # HELPER FUNCTIONS
+
+################## console helper 
+
+# https://github.com/inSileco/inSilecoMisc/blob/master/R/msgInfo.R
+
+rcites_msg_info <- function(..., appendLF = TRUE) {
+  message(col_blue(cli::symbol$info, " ", ...), appendLF = appendLF)
+  invisible(paste0(...))
+}
+
+rcites_cat_done <- function() {
+  message(col_green(cli::symbol$tick))
+}
+
+rcites_cat_failure <- function() {
+  message(col_red(cli::symbol$cross))
+}
+
+
 
 ################## General helpers
 
 rcites_baseurl <- function() "https://api.speciesplus.net/api/v1/"
 
 rcites_url <- function(...) {
+  # print(  paste0(rcites_baseurl(), ...))
     paste0(rcites_baseurl(), ...)
 }
 
 rcites_get <- function(q_url, token, ...) {
     names(token) <- "X-Authentication-Token"
-    httr::GET(q_url, httr::add_headers(token), ...)
+    httr::GET(httr::modify_url(q_url), httr::add_headers(token), ...)
 }
 
-rcites_res <- function(q_url, token, ...) {
+rcites_res <- function(q_url, token, raw, verbose, ...) {
     con <- rcites_get(q_url, token, ...)
-    # check status
-    httr::stop_for_status(con)
-    # parsed
-    httr::content(con, "parsed", ...)
+    suc <- httr::http_status(con)
+    if (suc$category == "Success") {
+      if (verbose) 
+        rcites_cat_done()
+      httr::content(con, "parsed", ...)
+    } else {
+        if (verbose) 
+          rcites_cat_failure()
+        httr::warn_for_status(con)
+      if (raw) {
+        httr::content(con, "parsed", ...)
+      } else {
+        # avoid conflict when merging outputs
+        NULL
+      }
+    }
 }
 
 rcites_timestamp <- function(x) {
     # ISO 8601 format
     tm <- as.POSIXlt(x, tz = "UTC")
-    strftime(tm, "%Y-%m-%dT%H:%M:%S")
+    curl::curl_escape(strftime(tm, "%Y-%m-%dT%H:%M:%S"))
 }
 
 rcites_lang <- function(x) {
@@ -57,24 +89,21 @@ rcites_checkid <- function(taxon_id) {
     # id check
     if (!grepl(taxon_id, pattern = "^[0-9]*$")) {
         warning("The taxon concept identifier is made of digits only.")
-        cat(">>> Skipping ", taxon_id, ".\n", sep = "")
+        rcites_msg_info("Skipping '", paste0(taxon_id, "'.\n"))
         out <- TRUE
     } else out <- FALSE
     out
 }
 
 rcites_current_id <- function(x) {
-  cat(cli::symbol$arrow_right, " Now processing taxon_id '", x,
-    "'", paste(rep(".", 26 - nchar(x)), collapse = ""), sep = "")
+  rcites_msg_info(
+      "Now processing taxon_id '", x ,"'",
+      paste(rep(".", 26 - nchar(x)), collapse = ""), 
+      " ",
+      appendLF = FALSE
+    )
 }
 
-rcites_cat_done <- function() {
-  cat_line(col_green(cli::symbol$tick))
-}
-
-rcites_cat_error <- function() {
-  cat_line(col_red(cli::symbol$cross))
-}
 
 rcites_add_taxon_id <- function(x, taxon_id) {
     if (length(x)) {
@@ -123,7 +152,7 @@ rcites_combine_lists <- function(x, taxon_id, raw) {
 rcites_getsecret <- function() {
     val <- Sys.getenv("SPECIESPLUS_TOKEN")
     if (identical(val, "")) {
-        message("
+        rcites_msg_info("
     `SPECIESPLUS_TOKEN` env var has not been set yet.
     A token is required to use the species + API, see
     https://api.speciesplus.net/documentation
@@ -145,27 +174,34 @@ rcites_autopagination <- function(q_url, per_page, pages, tot_page, token,
         pattern = "page=[[:digit:]]+\\&per_page=[[:digit:]]+$",
         replacement = "")
     ##
-    cat_rule(paste0(tot_page, " pages available, retrieving info from ", length(pages)," more"), col = "blue")
+    rcites_msg_info(
+      tot_page, 
+      " pages available, retrieving info from ", 
+      length(pages), 
+      " more"
+    )
     for (i in seq_along(pages)) {
         if (verbose)
             rcites_cat_pages(pages[i])
         q_url_new <- paste0(q_url_0, "page=", pages[i], "&per_page=",
           min(per_page, 500))
-        out[[i]] <- rcites_res(q_url_new, token, ...)
-        if (verbose)
-            rcites_cat_done()
+        out[[i]] <- rcites_res(q_url_new, token, verbose = verbose, ...)
     }
     #
     out
 }
 
 rcites_cat_pages <- function(pag) {
-  cat(cli::symbol$arrow_right, "Retrieving info from page", pag,
-    paste(rep(".", 25 - nchar(pag)), collapse = ""))
+  rcites_msg_info(
+    "Retrieving info from page ", 
+    pag, " ",
+    paste(rep(".", 25 - nchar(pag)), collapse = ""), " ",
+    appendLF = FALSE
+  )
 }
 
 rcites_numberpages <- function(x) {
-    x$total_entries%/%x$per_page + (x$total_entries%%x$per_page > 0)
+    x$total_entries %/% x$per_page + (x$total_entries %% x$per_page > 0)
 }
 
 
@@ -203,6 +239,21 @@ rcites_to_logical <- function(x) {
     x
 }
 
+# convert list element to data frame 
+rcites_list_to_df <- function(x, name) {
+  # data.frame(
+    do.call(
+      rbind, 
+      lapply(
+        x, 
+        function(y) do.call(
+          rbind, 
+          lapply(y[[name]], as.data.frame)
+        )
+      )
+    )
+}
+
 # assign class and reset rownames
 rcites_assign_class <- function(x) {
     row.names(x) <- NULL
@@ -222,9 +273,7 @@ rcites_simplify_listings <- function(x) {
           stringsAsFactors = FALSE))
       if (length(tmp) > 1) {
           out <- do.call(rbind, tmp)
-      } else {
-          out <- tmp[[1L]]
-      }
+      } else out <- tmp[[1L]]
     }
     #
     out <- rcites_to_logical(out)
@@ -259,11 +308,13 @@ rcites_simplify_distributions <- function(x) {
     out$distributions <- rcites_assign_class(out$distributions)
     # references
     tmp2 <- tmp$references
-    out$references <- data.frame(
-        id = rep(out$distributions$id,
-        unlist(lapply(tmp2, length))),
-        reference = unlist(tmp2), stringsAsFactors = FALSE)
-    out$references <- rcites_assign_class(out$references)
+    if (nrow(out$distributions)) {
+      out$references <- data.frame(
+          id = rep(out$distributions$id,
+          unlist(lapply(tmp2, length))),
+          reference = unlist(tmp2), stringsAsFactors = FALSE)
+      out$references <- rcites_assign_class(out$references)
+    } else out$references <- data.frame()
     #
     out
 }
@@ -284,6 +335,7 @@ rcites_print_title <- function(x, after, before) {
 }
 
 rcites_print_df <- function(x, nrows = 10) {
+  if (nrow(x)) {
     if ("tibble" %in% .packages()) {
         # tibble truncates the outputs already
         print(x)
@@ -293,14 +345,22 @@ rcites_print_df <- function(x, nrows = 10) {
         if (tmp < nrow(x))
             cat("-------truncated-------\n")
     }
+  } else {
+      cat(col_yellow("No records available.\n"))
+  }
 }
 
 rcites_print_df_rm <- function(x, col_rm = "", nrows = 10) {
+  
+  if (nrow(x)) {
     rcites_print_df(x[, !names(x) %in% col_rm])
     id <- which(col_rm %in% names(x))
     if (length(id))
-        cat("Field(s) not printed: ", paste(col_rm[id], collapse = ", "),
-            "\n")
+        cat("Field(s) not printed: ", paste(col_rm[id], collapse = ", "), "\n")
+  } else {
+      cat(col_yellow("No records available.\n"))
+  }
+  
 }
 
 rcites_print_taxon_id <- function(x, max_print = 20) {
@@ -318,7 +378,7 @@ rcites_print_taxon_id <- function(x, max_print = 20) {
 rcites_taxonconcept_request <- function(x, taxonomy, with_descendants,
     page, per_page, updated_since = NULL, language = NULL) {
     # deal with whitespace
-    tmp <- gsub(pattern = " ", replacement = "%20", x = x)
+    tmp <- curl::curl_escape(as.character(x))
     #
     query <- ifelse(tmp == "", "", paste0("name=", tmp))
     taxo <- ifelse(taxonomy == "CMS", "taxonomy=CMS", "")
@@ -347,8 +407,10 @@ rcites_taxonconcept_allentries <- function(x, sp_nm) {
 }
 
 rcites_taxonconcept_higher_taxa <- function(x, identifier) {
-    tmp <- lapply(lapply(x, rcites_null_to_na),
-      function(y) unlist(y$higher_taxa))
+    tmp <- lapply(
+      lapply(x, rcites_null_to_na),
+      function(y) unlist(y$higher_taxa)
+    )
     wch <- which(lapply(tmp, length) > 0)
     #
     out <- data.frame(id = identifier[wch], do.call(rbind, tmp[wch]),
@@ -357,19 +419,18 @@ rcites_taxonconcept_higher_taxa <- function(x, identifier) {
     out
 }
 
+
 rcites_taxonconcept_names <- function(x, name, identifier) {
-    tmp <- lapply(x, function(y) if (!is.null(y[[name]]))
-        do.call(rbind, y[[name]]))
-    wch <- which(unlist(lapply(tmp, length)) > 0)
-    #
-    if (length(wch)) {
-        out <- cbind(id = rep(identifier[wch], unlist(lapply(tmp[wch],
-            nrow))), data.frame(apply(do.call(rbind, tmp[wch]), 2, unlist),
-            stringsAsFactors = FALSE))
-    } else {
-        out <- data.frame()
-    }
-    #
+    out <- rcites_list_to_df(x, name)
+    if (!is.null(out)) {
+      if (! "id" %in% names(out)) {
+          nbr <- unlist(lapply(x, function(y) length(y[[name]])))
+          ids <- unlist(lapply(x, function(y) y$id))
+          # NB sometimes several synonyms are given seprated by a virgule, 
+          # sometimes the d is repeasted
+          out <- cbind(id = rep.int(ids, nbr), out)
+      }
+    } else out <- data.frame()
     out <- rcites_assign_class(out)
     out
 }

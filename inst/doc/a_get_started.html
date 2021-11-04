@@ -15,23 +15,40 @@
 
 <title>Get started with rcites</title>
 
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -51,7 +68,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -108,187 +125,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<style type="text/css">body {
-background-color: #fff;
-margin: 1em auto;
-max-width: 700px;
-overflow: visible;
-padding-left: 2em;
-padding-right: 2em;
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size: 14px;
-line-height: 1.35;
-}
-#TOC {
-clear: both;
-margin: 0 0 10px 10px;
-padding: 4px;
-width: 400px;
-border: 1px solid #CCCCCC;
-border-radius: 5px;
-background-color: #f6f6f6;
-font-size: 13px;
-line-height: 1.3;
-}
-#TOC .toctitle {
-font-weight: bold;
-font-size: 15px;
-margin-left: 5px;
-}
-#TOC ul {
-padding-left: 40px;
-margin-left: -1.5em;
-margin-top: 5px;
-margin-bottom: 5px;
-}
-#TOC ul ul {
-margin-left: -2em;
-}
-#TOC li {
-line-height: 16px;
-}
-table {
-margin: 1em auto;
-border-width: 1px;
-border-color: #DDDDDD;
-border-style: outset;
-border-collapse: collapse;
-}
-table th {
-border-width: 2px;
-padding: 5px;
-border-style: inset;
-}
-table td {
-border-width: 1px;
-border-style: inset;
-line-height: 18px;
-padding: 5px 5px;
-}
-table, table th, table td {
-border-left-style: none;
-border-right-style: none;
-}
-table thead, table tr.even {
-background-color: #f7f7f7;
-}
-p {
-margin: 0.5em 0;
-}
-blockquote {
-background-color: #f6f6f6;
-padding: 0.25em 0.75em;
-}
-hr {
-border-style: solid;
-border: none;
-border-top: 1px solid #777;
-margin: 28px 0;
-}
-dl {
-margin-left: 0;
-}
-dl dd {
-margin-bottom: 13px;
-margin-left: 13px;
-}
-dl dt {
-font-weight: bold;
-}
-ul {
-margin-top: 0;
-}
-ul li {
-list-style: circle outside;
-}
-ul ul {
-margin-bottom: 0;
-}
-pre, code {
-background-color: #f7f7f7;
-border-radius: 3px;
-color: #333;
-white-space: pre-wrap; 
-}
-pre {
-border-radius: 3px;
-margin: 5px 0px 10px 0px;
-padding: 10px;
-}
-pre:not([class]) {
-background-color: #f7f7f7;
-}
-code {
-font-family: Consolas, Monaco, 'Courier New', monospace;
-font-size: 85%;
-}
-p > code, li > code {
-padding: 2px 0px;
-}
-div.figure {
-text-align: center;
-}
-img {
-background-color: #FFFFFF;
-padding: 2px;
-border: 1px solid #DDDDDD;
-border-radius: 3px;
-border: 1px solid #CCCCCC;
-margin: 0 5px;
-}
-h1 {
-margin-top: 0;
-font-size: 35px;
-line-height: 40px;
-}
-h2 {
-border-bottom: 4px solid #f7f7f7;
-padding-top: 10px;
-padding-bottom: 2px;
-font-size: 145%;
-}
-h3 {
-border-bottom: 2px solid #f7f7f7;
-padding-top: 10px;
-font-size: 120%;
-}
-h4 {
-border-bottom: 1px solid #f7f7f7;
-margin-left: 8px;
-font-size: 105%;
-}
-h5, h6 {
-border-bottom: 1px solid #ccc;
-font-size: 105%;
-}
-a {
-color: #0033dd;
-text-decoration: none;
-}
-a:hover {
-color: #6666ff; }
-a:visited {
-color: #800080; }
-a:visited:hover {
-color: #BB00BB; }
-a[href^="http:"] {
-text-decoration: underline; }
-a[href^="https:"] {
-text-decoration: underline; }
 
-code > span.kw { color: #555; font-weight: bold; } 
-code > span.dt { color: #902000; } 
-code > span.dv { color: #40a070; } 
-code > span.bn { color: #d14; } 
-code > span.fl { color: #d14; } 
-code > span.ch { color: #d14; } 
-code > span.st { color: #d14; } 
-code > span.co { color: #888888; font-style: italic; } 
-code > span.ot { color: #007020; } 
-code > span.al { color: #ff0000; font-weight: bold; } 
-code > span.fu { color: #900; font-weight: bold; } 
-code > span.er { color: #a61717; background-color: #e3d2d2; } 
-</style>
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
 
 
 
@@ -320,8 +158,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <li><p>set an environment variable <code>SPECIESPLUS_TOKEN</code> in your <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Startup.html"><code>.Renviron</code></a> file (preferred for frequent users);</p></li>
 <li><p>use <code>set_token()</code> to set up the token as a character string (with quotes). If not entered in the function, the token can be passed without quotes (not as a character string) after the prompt. This way, the token <code>SPECIESPLUS_TOKEN</code> is interactively set up only for the current R session, meaning a login will be required for the future R sessions (preferred);</p></li>
 </ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(rcites)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">set_token</span>(<span class="st">&quot;8QW6Qgh57sBG2k0gtt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rcites)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set_token</span>(<span class="st">&quot;8QW6Qgh57sBG2k0gtt&quot;</span>)</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>use the <code>token</code> argument inside the functions, <em>i.e.</em> the token is passed manually to each function call.</li>
 </ol>
@@ -335,33 +173,159 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="basic-calls-to-spp_taxonconcept" class="section level3">
 <h3>Basic calls to spp_taxonconcept()</h3>
 <p>In order to efficiently query information from the CITES database, you first need to retrieve the unique taxon identifier <code>taxon_id</code> from the <a href="https://api.speciesplus.net/documentation/v1/taxon_concepts/index.html">Species+ taxon concept</a>. To do so, you should first call <code>spp_taxonconcept()</code> and provide the scientific name of the taxon you are looking for. Let us start by requesting the identifier of the African bush elephant, <em>i.e.</em> <em>Loxodonta africana</em>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>res1 &lt;-<span class="st"> </span><span class="kw">spp_taxonconcept</span>(<span class="dt">query_taxon =</span> <span class="st">&quot;Loxodonta africana&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>res1 <span class="ot">&lt;-</span> <span class="fu">spp_taxonconcept</span>(<span class="at">query_taxon =</span> <span class="st">&quot;Loxodonta africana&quot;</span>)</span></code></pre></div>
 <p>Note that if you have decide to set your token using the third option, then the code should look like the one below:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>res1 &lt;-<span class="st"> </span><span class="kw">spp_taxonconcept</span>(<span class="dt">query_taxon =</span> <span class="st">&quot;Loxodonta africana&quot;</span>, <span class="dt">token =</span> <span class="st">&quot;8QW6Qgh57sBG2k0gtt&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>res1 <span class="ot">&lt;-</span> <span class="fu">spp_taxonconcept</span>(<span class="at">query_taxon =</span> <span class="st">&quot;Loxodonta africana&quot;</span>, <span class="at">token =</span> <span class="st">&quot;8QW6Qgh57sBG2k0gtt&quot;</span>)</span></code></pre></div>
 </div>
 <div id="object-spp_taxonconcept" class="section level3">
 <h3>Object <code>spp_taxonconcept</code></h3>
 <p><code>res1</code> is an S3 object of class <code>spp_taxon</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">attributes</span>(res1)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(res1)</span></code></pre></div>
+<pre><code>#&gt;  $names
+#&gt;  [1] &quot;all_id&quot;         &quot;general&quot;        &quot;higher_taxa&quot;    &quot;accepted_names&quot; &quot;common_names&quot;   &quot;synonyms&quot;      
+#&gt;  [7] &quot;cites_listings&quot;
+#&gt;  
+#&gt;  $class
+#&gt;  [1] &quot;spp_taxon&quot;
+#&gt;  
+#&gt;  $taxonomy
+#&gt;  [1] &quot;CITES&quot;</code></pre>
 <p>that contains information sorted into several data frames (see <code>?spp_taxonconcept</code> for further details):</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>res1</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>res1</span></code></pre></div>
+<pre><code>#&gt;  
+#&gt;  ── General info - CITES ($general): ──────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 8
+#&gt;    id    full_name          author_year        rank    name_status updated_at          active cites_listing
+#&gt;    &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt;       &lt;dttm&gt;              &lt;lgl&gt;  &lt;chr&gt;        
+#&gt;  1 4521  Loxodonta africana (Blumenbach, 1797) SPECIES A           2021-10-13 13:12:58 TRUE   I/II         
+#&gt;  
+#&gt;  ── Classification ($higher_taxa): ────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 6
+#&gt;    id    kingdom  phylum   class    order       family      
+#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;       
+#&gt;  1 4521  Animalia Chordata Mammalia Proboscidea Elephantidae
+#&gt;  
+#&gt;  ── Synonyms ($synonyms): ─────────────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 4
+#&gt;       id full_name          author_year      rank   
+#&gt;    &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;            &lt;chr&gt;  
+#&gt;  1 37069 Loxodonta cyclotis (Matschie, 1900) SPECIES
+#&gt;  
+#&gt;  ── Common names ($common_names): ─────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 3
+#&gt;        id name               language
+#&gt;     &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;   
+#&gt;   1  4521 Ndovo              SW      
+#&gt;   2  4521 Tembo              SW      
+#&gt;   3  4521 Haathi             UR      
+#&gt;   4  4521 Elefante           PT      
+#&gt;   5  4521 Slon               RU      
+#&gt;   6  4521 Elefant            NO      
+#&gt;   7  4521 Olifant            NL      
+#&gt;   8  4521 Afrikaanse olifant NL      
+#&gt;   9  4521 Elefante africano  ES      
+#&gt;  10  4521 afrikansk elefant  SV      
+#&gt;  -------truncated-------
+#&gt;  
+#&gt;  Information available: $all_id, $general, $higher_taxa, $accepted_names, $common_names, $synonyms, $cites_listings</code></pre>
 <p>For some taxa, there are more than one taxon identifier available. In <code>general</code> only <em>active</em> identifiers are listed, but the full list of identifiers are available in <code>all_id</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>res3 &lt;-<span class="st"> </span><span class="kw">spp_taxonconcept</span>(<span class="dt">query =</span> <span class="st">&quot;Amazilia versicolor&quot;</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a>res3<span class="op">$</span>general</span>
-<span id="cb6-3"><a href="#cb6-3"></a>res3<span class="op">$</span>all_id</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>res3 <span class="ot">&lt;-</span> <span class="fu">spp_taxonconcept</span>(<span class="at">query =</span> <span class="st">&quot;Amazilia versicolor&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt;  ℹ Retrieving info from page 1 ........................ ✔</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>res3<span class="sc">$</span>general</span></code></pre></div>
+<pre><code>#&gt;  # A tibble: 1 × 8
+#&gt;    id    full_name           author_year      rank    name_status updated_at          active cites_listing
+#&gt;  * &lt;chr&gt; &lt;chr&gt;               &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;       &lt;dttm&gt;              &lt;lgl&gt;  &lt;chr&gt;        
+#&gt;  1 3210  Amazilia versicolor (Vieillot, 1818) SPECIES A           2015-05-07 15:10:59 TRUE   II</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res3<span class="sc">$</span>all_id</span></code></pre></div>
+<pre><code>#&gt;  # A tibble: 2 × 7
+#&gt;    id    full_name           author_year      rank    name_status updated_at          active
+#&gt;    &lt;chr&gt; &lt;chr&gt;               &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;       &lt;dttm&gt;              &lt;lgl&gt; 
+#&gt;  1 3210  Amazilia versicolor (Vieillot, 1818) SPECIES A           2015-05-07 15:10:59 TRUE  
+#&gt;  2 65789 Amazilia versicolor (Vieillot, 1818) SPECIES S           2016-09-23 15:30:46 FALSE</code></pre>
 <p>Also, if the taxon is not listed, a warning message should come up.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>res4 &lt;-<span class="st"> </span><span class="kw">spp_taxonconcept</span>(<span class="dt">query =</span> <span class="st">&quot;Homo Sapiens&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>res4 <span class="ot">&lt;-</span> <span class="fu">spp_taxonconcept</span>(<span class="at">query =</span> <span class="st">&quot;Homo Sapiens&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt;  ℹ Retrieving info from page 1 ........................ ✔</code></pre>
+<pre><code>#&gt;  Warning in spp_taxonconcept(query = &quot;Homo Sapiens&quot;): Taxon not listed.</code></pre>
 </div>
 <div id="custom-calls-to-spp_taxonconcept" class="section level3">
 <h3>Custom calls to spp_taxonconcept()</h3>
 <p><code>spp_taxonconcept()</code> includes several arguments to retrieve a specific subset of information (see <code>?spp_taxonconcept</code> for more details):</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">args</span>(<span class="st">&#39;spp_taxonconcept&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">args</span>(<span class="st">&#39;spp_taxonconcept&#39;</span>)</span></code></pre></div>
+<pre><code>#&gt;  function (query_taxon, taxonomy = &quot;CITES&quot;, with_descendants = FALSE, 
+#&gt;      language = NULL, updated_since = NULL, per_page = 500, pages = NULL, 
+#&gt;      raw = FALSE, token = NULL, verbose = TRUE, pause = 1, ...) 
+#&gt;  NULL</code></pre>
 <p>Most importantly, the argument <code>taxonomy</code> allows a selection between the two databases (CITES or CMS):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">spp_taxonconcept</span>(<span class="dt">query =</span> <span class="st">&quot;Amazilia versicolor&quot;</span>, <span class="dt">taxonomy =</span> <span class="st">&quot;CMS&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">spp_taxonconcept</span>(<span class="dt">query =</span> <span class="st">&quot;Loxodonta africana&quot;</span>, <span class="dt">taxonomy =</span> <span class="st">&quot;CMS&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spp_taxonconcept</span>(<span class="at">query =</span> <span class="st">&quot;Amazilia versicolor&quot;</span>, <span class="at">taxonomy =</span> <span class="st">&quot;CMS&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt;  ℹ Retrieving info from page 1 ........................ ✔</code></pre>
+<pre><code>#&gt;  Warning in spp_taxonconcept(query = &quot;Amazilia versicolor&quot;, taxonomy = &quot;CMS&quot;): Taxon not listed.</code></pre>
+<pre><code>#&gt;  NULL</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spp_taxonconcept</span>(<span class="at">query =</span> <span class="st">&quot;Loxodonta africana&quot;</span>, <span class="at">taxonomy =</span> <span class="st">&quot;CMS&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt;  ℹ Retrieving info from page 1 ........................ ✔</code></pre>
+<pre><code>#&gt;  
+#&gt;  ── General info - CMS ($general): ────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 7
+#&gt;    id    full_name          author_year        rank    name_status updated_at          active
+#&gt;    &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt;       &lt;dttm&gt;              &lt;lgl&gt; 
+#&gt;  1 11691 Loxodonta africana (Blumenbach, 1797) SPECIES A           2021-05-06 12:44:13 TRUE  
+#&gt;  
+#&gt;  ── Classification ($higher_taxa): ────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 6
+#&gt;    id    kingdom  phylum   class    order       family      
+#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;       
+#&gt;  1 11691 Animalia Chordata Mammalia Proboscidea Elephantidae
+#&gt;  
+#&gt;  ── Synonyms ($synonyms): ─────────────────────────────────────────────────────────────────────────────────────────────
+#&gt;  No records available.
+#&gt;  
+#&gt;  ── Common names ($common_names): ─────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 3
+#&gt;        id name               language
+#&gt;     &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;   
+#&gt;   1 11691 Tembo              SW      
+#&gt;   2 11691 Ndovo              SW      
+#&gt;   3 11691 Haathi             UR      
+#&gt;   4 11691 Elefante           PT      
+#&gt;   5 11691 Slon               RU      
+#&gt;   6 11691 Elefant            NO      
+#&gt;   7 11691 Olifant            NL      
+#&gt;   8 11691 Afrikaanse olifant NL      
+#&gt;   9 11691 Elefante africano  ES      
+#&gt;  10 11691 afrikansk elefant  SV      
+#&gt;  -------truncated-------
+#&gt;  
+#&gt;  Information available: $all_id, $general, $higher_taxa, $accepted_names, $common_names, $synonyms</code></pre>
 <p><code>language</code> and <code>updated_since</code> are convenient filters for the written language of common names (must be a two-letters code, see <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>) and the last update of the entries, respectively:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">spp_taxonconcept</span>(<span class="dt">query_taxon =</span> <span class="st">&quot;Loxodonta africana&quot;</span>, <span class="dt">language =</span> <span class="st">&#39;EN&#39;</span>,</span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="dt">updated_since =</span> <span class="st">&quot;2016-01-01&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spp_taxonconcept</span>(<span class="at">query_taxon =</span> <span class="st">&quot;Loxodonta africana&quot;</span>, <span class="at">language =</span> <span class="st">&#39;EN&#39;</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">updated_since =</span> <span class="st">&quot;2016-01-01&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt;  ℹ Retrieving info from page 1 ........................ ✔</code></pre>
+<pre><code>#&gt;  
+#&gt;  ── General info - CITES ($general): ──────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 8
+#&gt;    id    full_name          author_year        rank    name_status updated_at          active cites_listing
+#&gt;    &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt;       &lt;dttm&gt;              &lt;lgl&gt;  &lt;chr&gt;        
+#&gt;  1 4521  Loxodonta africana (Blumenbach, 1797) SPECIES A           2021-10-13 13:12:58 TRUE   I/II         
+#&gt;  
+#&gt;  ── Classification ($higher_taxa): ────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 6
+#&gt;    id    kingdom  phylum   class    order       family      
+#&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;       
+#&gt;  1 4521  Animalia Chordata Mammalia Proboscidea Elephantidae
+#&gt;  
+#&gt;  ── Synonyms ($synonyms): ─────────────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 1 × 4
+#&gt;       id full_name          author_year      rank   
+#&gt;    &lt;int&gt; &lt;chr&gt;              &lt;chr&gt;            &lt;chr&gt;  
+#&gt;  1 37069 Loxodonta cyclotis (Matschie, 1900) SPECIES
+#&gt;  
+#&gt;  ── Common names ($common_names): ─────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 2 × 3
+#&gt;       id name                      language
+#&gt;    &lt;int&gt; &lt;chr&gt;                     &lt;chr&gt;   
+#&gt;  1  4521 African Elephant          EN      
+#&gt;  2  4521 African Savannah Elephant EN      
+#&gt;  
+#&gt;  Information available: $all_id, $general, $higher_taxa, $accepted_names, $common_names, $synonyms, $cites_listings</code></pre>
 </div>
 </div>
 <div id="retrieve-a-taxon-identifiers-available-data" class="section level2">
@@ -388,22 +352,139 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="cites-legislation-data" class="section level3">
 <h3>CITES legislation data</h3>
 <p>First, we can retrieve current CITES appendix listings and reservations, CITES quotas, and CITES suspensions for a given taxon concept.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">spp_cites_legislation</span>(<span class="dt">taxon_id =</span> <span class="st">&quot;4521&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spp_cites_legislation</span>(<span class="at">taxon_id =</span> <span class="st">&quot;4521&quot;</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>#&gt;  
+#&gt;  ── Cites listings ($cites_listings): ─────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 6
+#&gt;     id    taxon_concept_id is_current appendix change_type effective_at
+#&gt;     &lt;chr&gt; &lt;chr&gt;            &lt;lgl&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;       
+#&gt;   1 30344 4521             TRUE       I        +           2017-01-02  
+#&gt;   2 30115 4521             TRUE       II       +           2019-11-26  
+#&gt;   3 32160 4521             TRUE       II       R+          2019-11-26  
+#&gt;   4 32161 4521             TRUE       II       R+          2019-11-26  
+#&gt;   5 32156 4521             TRUE       II       R+          2019-11-26  
+#&gt;   6 32158 4521             TRUE       II       R+          2019-11-26  
+#&gt;   7 32154 4521             TRUE       II       R+          2019-11-26  
+#&gt;   8 32159 4521             TRUE       II       R+          2019-11-26  
+#&gt;   9 32157 4521             TRUE       II       R+          2019-11-26  
+#&gt;  10 32155 4521             TRUE       II       R+          2019-11-26  
+#&gt;  
+#&gt;  ── Cites quotas ($cites_quotas): ─────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 10
+#&gt;     id    taxon_concept_id quota publication_date public_display is_current unit  geo_entity.iso_code2 geo_entity.name 
+#&gt;     &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;            &lt;lgl&gt;          &lt;lgl&gt;      &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt;           
+#&gt;   1 25337 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  KE                   Kenya           
+#&gt;   2 25348 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  LR                   Liberia         
+#&gt;   3 25355 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  MW                   Malawi          
+#&gt;   4 25358 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  ML                   Mali            
+#&gt;   5 25375 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  MZ                   Mozambique      
+#&gt;   6 25390 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  AO                   Angola          
+#&gt;   7 25414 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  NE                   Niger           
+#&gt;   8 25431 4521             0     2021-02-03       TRUE           TRUE       &lt;NA&gt;  NG                   Nigeria         
+#&gt;   9 25554 4521             100   2021-02-03       TRUE           TRUE       &lt;NA&gt;  TZ                   United Republic…
+#&gt;  10 25555 4521             300   2021-02-03       TRUE           TRUE       &lt;NA&gt;  ZA                   South Africa    
+#&gt;  # … with 1 more variable: geo_entity.type &lt;chr&gt;
+#&gt;  -------truncated-------
+#&gt;  Field(s) not printed:  notes, url 
+#&gt;  
+#&gt;  ── Cites suspensions ($cites_suspensions): ───────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 8
+#&gt;     id    taxon_concept_id start_date is_current applies_to_import geo_entity.iso_code2 geo_entity.name geo_entity.type
+#&gt;     &lt;chr&gt; &lt;chr&gt;            &lt;chr&gt;      &lt;lgl&gt;      &lt;lgl&gt;             &lt;chr&gt;                &lt;chr&gt;           &lt;chr&gt;          
+#&gt;   1 17621 4521             2014-08-11 TRUE       TRUE              US                   United States … COUNTRY        
+#&gt;   2 17620 4521             2014-08-11 TRUE       TRUE              US                   United States … COUNTRY        
+#&gt;   3 17686 4521             2014-10-10 TRUE       TRUE              US                   United States … COUNTRY        
+#&gt;   4 18709 4521             2010-08-16 TRUE       TRUE              ZW                   Zimbabwe        COUNTRY        
+#&gt;   5 15983 &lt;NA&gt;             2011-01-19 TRUE       FALSE             DJ                   Djibouti        COUNTRY        
+#&gt;   6 22079 &lt;NA&gt;             2018-01-30 TRUE       FALSE             DJ                   Djibouti        COUNTRY        
+#&gt;   7 22076 &lt;NA&gt;             2018-01-22 TRUE       FALSE             LR                   Liberia         COUNTRY        
+#&gt;   8 22132 4521             2018-03-19 TRUE       FALSE             AU                   Australia       COUNTRY        
+#&gt;   9 23168 &lt;NA&gt;             2019-07-04 TRUE       FALSE             SO                   Somalia         COUNTRY        
+#&gt;  10 24947 4521             2020-05-26 TRUE       TRUE              CN                   China           COUNTRY        
+#&gt;  -------truncated-------
+#&gt;  Field(s) not printed:  notes, start_notification.name, start_notification.date, start_notification.url</code></pre>
 </div>
 <div id="eu-legislation-data" class="section level3">
 <h3>EU legislation data</h3>
 <p>Similarly, we can also retrieve current EU annex listings, SRG opinions, and EU suspensions with <code>spp_eu_legislation</code>. Both legislation functions have a <code>scope</code> argument that sets the time scope of legislation and take one value among <code>current</code>, <code>historic</code> and <code>all</code> (default is set to <code>current</code>). For instance, one can get all information pertaining to EU annex listing for <em>Amazilia versicolor</em> with the following command line:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">spp_eu_legislation</span>(<span class="dt">taxon_id =</span> <span class="st">&quot;3210&quot;</span>, <span class="dt">scope =</span> <span class="st">&quot;all&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spp_eu_legislation</span>(<span class="at">taxon_id =</span> <span class="st">&quot;3210&quot;</span>, <span class="at">scope =</span> <span class="st">&quot;all&quot;</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>#&gt;  
+#&gt;  ── EU listings ($eu_listings): ───────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 6
+#&gt;     id    taxon_concept_id is_current annex change_type effective_at
+#&gt;     &lt;chr&gt; &lt;chr&gt;            &lt;lgl&gt;      &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;       
+#&gt;   1 17611 3210             FALSE      B     +           1997-06-01  
+#&gt;   2 17610 3210             FALSE      B     +           2000-12-18  
+#&gt;   3 17609 3210             FALSE      B     +           2003-08-30  
+#&gt;   4 17608 3210             FALSE      B     +           2005-08-22  
+#&gt;   5 17607 3210             FALSE      B     +           2008-04-11  
+#&gt;   6 17606 3210             FALSE      B     +           2009-05-22  
+#&gt;   7 17605 3210             FALSE      B     +           2010-08-15  
+#&gt;   8 17604 3210             FALSE      B     +           2012-02-14  
+#&gt;   9 17603 3210             FALSE      B     +           2012-12-15  
+#&gt;  10 17602 3210             FALSE      B     +           2013-08-10  
+#&gt;  -------truncated-------
+#&gt;  
+#&gt;  ── EU decisions ($eu_decisions): ─────────────────────────────────────────────────────────────────────────────────────
+#&gt;  No records available.</code></pre>
 </div>
 <div id="distribution-data" class="section level3">
 <h3>Distribution data</h3>
 <p>Distribution data at the country level is also available for a given taxon concept:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">spp_distributions</span>(<span class="st">&quot;4521&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spp_distributions</span>(<span class="st">&quot;4521&quot;</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>#&gt;  
+#&gt;  ── Distributions ($distributions): ───────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 5
+#&gt;        id iso_code2 name              type    tags 
+#&gt;     &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt;
+#&gt;   1  1778 ML        Mali              COUNTRY &quot;&quot;   
+#&gt;   2  1923 GQ        Equatorial Guinea COUNTRY &quot;&quot;   
+#&gt;   3  4429 RW        Rwanda            COUNTRY &quot;&quot;   
+#&gt;   4  4491 GH        Ghana             COUNTRY &quot;&quot;   
+#&gt;   5  5628 SD        Sudan             COUNTRY &quot;&quot;   
+#&gt;   6  6724 ET        Ethiopia          COUNTRY &quot;&quot;   
+#&gt;   7  8995 GA        Gabon             COUNTRY &quot;&quot;   
+#&gt;   8 12983 AO        Angola            COUNTRY &quot;&quot;   
+#&gt;   9 15554 CM        Cameroon          COUNTRY &quot;&quot;   
+#&gt;  10 17060 BJ        Benin             COUNTRY &quot;&quot;   
+#&gt;  -------truncated-------
+#&gt;  
+#&gt;  ── References ($references): ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 2
+#&gt;        id reference                       
+#&gt;     &lt;int&gt; &lt;chr&gt;                           
+#&gt;   1  1778 Kingdon, J., Happold [truncated]
+#&gt;   2  1923 Basilio, A. 1962. La [truncated]
+#&gt;   3  4429 Jackson, P. 1982. El [truncated]
+#&gt;   4  4429 Monfort, A. 1992. Pr [truncated]
+#&gt;   5  4491 Grubb, P., Jones, T. [truncated]
+#&gt;   6  4491 Jackson, P. 1982. El [truncated]
+#&gt;   7  5628 Hameed, S.M.A. and E [truncated]
+#&gt;   8  6724 Bolton, M. 1973. Not [truncated]
+#&gt;   9  6724 Largen, M. J. and Ya [truncated]
+#&gt;  10  6724 Meester, J. and Setz [truncated]
+#&gt;  -------truncated-------</code></pre>
 </div>
 <div id="references" class="section level3">
 <h3>References</h3>
 <p>Finally, we can retrieve all available references for a given taxa.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">spp_references</span>(<span class="st">&quot;4521&quot;</span>, <span class="dt">verbose =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spp_references</span>(<span class="st">&quot;4521&quot;</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>#&gt;  
+#&gt;  ── References ($references): ─────────────────────────────────────────────────────────────────────────────────────────
+#&gt;  # A tibble: 10 × 3
+#&gt;     id    citation                                             is_standard
+#&gt;     &lt;chr&gt; &lt;chr&gt;                                                &lt;chr&gt;      
+#&gt;   1 10265 Anon. 1978. Red data book: Mammalia. IUC [truncated] FALSE      
+#&gt;   2 6344  Barnes, R. F., Agnagna, M., Alers, M. P. [truncated] FALSE      
+#&gt;   3 17013 Blanc, J.J., Thouless, C.R., Hart, J.A., [truncated] FALSE      
+#&gt;   4 6371  Burton, M. P. 1994. Alternative projecti [truncated] FALSE      
+#&gt;   5 6532  Douglas-Hamilton, I. 1987. African Eleph [truncated] FALSE      
+#&gt;   6 6534  Douglas-Hamilton, I. 1987. African Eleph [truncated] FALSE      
+#&gt;   7 6825  Jackson, P. 1982. Elephants and rhinos i [truncated] FALSE      
+#&gt;   8 7224  Meester, J. and Setzer, H. W (eds.) 1974 [truncated] FALSE      
+#&gt;   9 7609  Parker, I. and Amin, M. 1983. Ivory cris [truncated] FALSE      
+#&gt;  10 19397 Parker, I.S.C. and Martin, E.B. 1982. Ho [truncated] FALSE      
+#&gt;  -------truncated-------</code></pre>
 </div>
 </div>
 </div>
