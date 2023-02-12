@@ -51,7 +51,8 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
+#' # this calls will only work if a token is set and valid
 #' res1 <- spp_taxonconcept(query_taxon = 'Loxodonta africana')
 #' res2 <- spp_taxonconcept(query_taxon = 'Amazilia versicolor', raw = TRUE)
 #' res3 <- spp_taxonconcept(query_taxon = '', taxonomy = 'CMS', pages = c(1, 3),
